@@ -1,19 +1,29 @@
 from OpenGL.GL import *
+from OpenGL.GLUT import *
 from pygame.locals import *
-from OpenGL.GLUT import glutSolidCube  # ✅ ESTA LÍNEA ES CLAVE
-
+from model_loader import load_model, draw_model
 
 class Player:
     def __init__(self):
         self.position = [0, 0, 0]
         self.speed = 0.2
+        self.model = load_model("assets/models/player/low_poly_knight.glb")
 
     def draw(self):
-        x, y, z = self.position
+        # Cubo rojo de prueba
         glPushMatrix()
-        glTranslatef(x, y + 0.5, z)
-        glColor3f(0.6, 0.3, 0.1)  # marrón simple
-        glutSolidCube(1)
+        glTranslatef(0, 0, 0)
+        glColor3f(1.0, 0.0, 0.0)
+        glutSolidCube(2)
+        glPopMatrix()
+
+        # Modelo real cargado
+        glPushMatrix()
+        glTranslatef(self.position[0], self.position[1], self.position[2])
+        glScalef(1.0, 1.0, 1.0)  # escala grande para ver el modelo
+        glRotatef(-90, 1, 0, 0)
+        glColor3f(0.6, 0.6, 1.0)
+        draw_model(self.model)
         glPopMatrix()
 
     def update(self, keys):

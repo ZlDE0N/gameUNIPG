@@ -4,55 +4,26 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
-from camera import Camera
-from player import Player
-
-def draw_ground():
-    glBegin(GL_QUADS)
-    glColor3f(0.5, 0.8, 0.5)
-    glVertex3f(-20, 0, -20)
-    glVertex3f( 20, 0, -20)
-    glVertex3f( 20, 0,  20)
-    glVertex3f(-20, 0,  20)
-    glEnd()
-
 def main():
     pygame.init()
-    display = (1280, 720)
+    display = (800, 600)
     pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
-    pygame.display.set_caption("Legado de la Espada")
+    pygame.display.set_caption("Cubo Rojo")
+
     glutInit()
-
-    gluPerspective(45, (display[0] / display[1]), 0.1, 100.0)
+    glClearColor(0.2, 0.2, 0.6, 1.0)
     glEnable(GL_DEPTH_TEST)
-    pygame.mouse.set_visible(False)
-    pygame.event.set_grab(True)
 
-    clock = pygame.time.Clock()
-    camera = Camera()
-    player = Player()
+    gluPerspective(45, (display[0] / display[1]), 0.1, 50.0)
+    glTranslatef(0.0, 0.0, -5)
 
-    running = True
-    while running:
-        keys = pygame.key.get_pressed()
+    while True:
         for event in pygame.event.get():
-            if event.type == QUIT or keys[K_ESCAPE]:
-                running = False
-
-        player.update(keys)
-        camera.handle_mouse()
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                return
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-        glLoadIdentity()
-        camera.update(player.position)
-
-        draw_ground()
-        player.draw()
-
+        glColor3f(1.0, 0.0, 0.0)
+        glutSolidCube(2)
         pygame.display.flip()
-        clock.tick(60)
-
-    pygame.quit()
-
-if __name__ == "__main__":
-    main()
