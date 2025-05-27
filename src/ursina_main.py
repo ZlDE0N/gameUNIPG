@@ -6,12 +6,16 @@ app = Ursina()
 # ✅ Ajustar carpeta base de assets
 application.asset_folder = Path('assets')
 
-# 🧍 Modelo del caballero
+# Estado del juego
+player_speed = 3
+
+# 🧍 Modelo del caballero (jugador)
 player = Entity(
     model='models/player/low_poly_knight.glb',
     scale=0.05,
     position=(0, 0, 0),
     color=color.white,
+    collider='box'
 )
 
 print('🟢 Modelo cargado:', player.model)
@@ -33,14 +37,24 @@ ground = Entity(
     collider='box'
 )
 
-# 💡 Luz básica
+# 💡 Luz direccional
 DirectionalLight().look_at(Vec3(1, -1, -1))
 
 # 🎥 Cámara libre con mouse
 EditorCamera()
 
-# 🔁 Animación de rotación para verificar modelo
+# 🔁 Lógica de movimiento por frame
 def update():
-    player.rotation_y += time.dt * 30
+    # Movimiento básico con WASD
+    direction = Vec3(
+        held_keys['d'] - held_keys['a'],
+        0,
+        held_keys['s'] - held_keys['w']
+    ).normalized()
+    
+    player.position += direction * time.dt * player_speed
+
+    # Rotación animada (opcional)
+    # player.rotation_y += time.dt * 30
 
 app.run()
