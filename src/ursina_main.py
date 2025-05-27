@@ -41,6 +41,6 @@ EditorCamera()
 
 # 🔁 Animación de rotación para verificar modelo
 def update():
-    player.rotation_y += time.dt * 30
+    player.rotation_y += time.dt * 30
 
 app.run()

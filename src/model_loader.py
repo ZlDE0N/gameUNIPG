@@ -19,11 +19,10 @@ def load_model(path):
 
 def draw_model(model):
     if not model or not hasattr(model, "meshes"):
-        print("❌ No model or meshes to draw.")
         return
 
     for mesh in model.meshes:
-        print(f"✅ Drawing mesh with {len(mesh.vertices)} vertices")
+        print(f"Drawing mesh with {len(mesh.vertices)} vertices")
         glBegin(GL_TRIANGLES)
         for face in mesh.faces:
             for idx in face:
