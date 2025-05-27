@@ -1,0 +1,43 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entorno virtual
+legado_env/
+.venv/
+env/
+venv/
+
+# VS Code settings
+.vscode/
+*.code-workspace
+
+# Archivos temporales
+*.log
+*.tmp
+*.bak
+*.swp
+*.DS_Store
+Thumbs.db
+
+# Archivos de compilación de shaders (por si compilas .spv o binarios)
+*.spv
+
+# Archivos personales / pruebas locales
+local_settings.py
+
+# Archivos del sistema operativo
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# Archivos de salida de grabación o renderizado
+*.mp4
+*.avi
+*.mov
+*.webm
+
+# Archivos exportados del juego (builds)
+dist/
+build/
